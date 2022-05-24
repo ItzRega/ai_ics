@@ -1,0 +1,72 @@
+
+Write a Java program to implement the Diffie-Hellman Key Exchange mechanism | Diffie Hellman Key Exchange in Java | Cryptography
+
+AIM: Implement the Diffie-Hellman Key Exchange mechanism using HTML and JavaScript.
+
+HARDWARE AND SOFTWARE REQUIREMENT:
+1. Intel based Desktop PC: - RAM of 512 MB
+2. Notepad/Notepad ++ editor
+3. Net beans / Eclipse
+
+THEORY:
+Ø Diffie Hellman (DH) key exchange algorithm is a way for securely exchanging cryptographic keys over
+internet(Public channel). Keys are not actually exchanged – they are jointly derived.
+Ø If 1 Person and 2 Person want to communicate with each other, they first agree between them a large
+prime number P, and a generator (or base) G (where 0 < G < P).
+Ø 1 Person select a secret integer “a” (his private key) and then calculates x=G mod P (which is his
+public key). 2 Person chooses his private key “b’, and calculates his public key y=G mod P
+Ø 1 Person and 2 Person exchange values of x and y.
+Ø 1 Person and 2 Person compute symmetric keys by using
+K =y mod P and k = x mod P
+
+
+Ø Example:
+Step 1 : 1 Person and 2nd Person get public numbers P = 23,G = 9
+Step 2: 1 Person selected a private key a = 4 and 2 Person selected a private key b = 3
+Step 3: 1 Person and 2 Person compute public values
+1 Person : x =(9 mod 23) = (6561 mod 23) = 6
+2 Person: y = (9 mod 23) = (729 mod 23) = 16
+Step 4: 1 Person and 2 Person exchange public numbers
+Step 5: 1 Person receives public key y =16 and 2 Person receives public key x = 6
+Step 6: 1 Person and 2 Person compute symmetric keys
+1 Person : k = y mod p = 65536 mod 23 = 9
+2 Person: k = x mod p = 216 mod 23 = 9
+Step 7: 9 is the shared secret
+
+
+
+SOURCE CODE:
+
+import java.util.*;
+class DiffieHellman
+{
+public static void main(String[] args)
+{
+Scanner sc=new Scanner(System.in);
+System.out.println("Enter modulo(p)");
+int p=sc.nextInt();
+System.out.println("Enter primitive root of "+p);
+int g=sc.nextInt();
+System.out.println("Enter 1st secret number(1st Person)");
+int a=sc.nextInt();
+System.out.println("Enter 2nd secret number(2nd Person)");
+int b=sc.nextInt();
+int A = (int)Math.pow(g,a)%p;
+int B = (int)Math.pow(g,b)%p;
+int S_A = (int)Math.pow(B,a)%p;
+int S_B =(int)Math.pow(A,b)%p;
+if(S_A==S_B)
+{
+System.out.println("1st Person and 2nd Person can communicate with each other!!!");
+System.out.println("They share a secret number = "+S_A);
+}
+else
+{
+System.out.println("1st Person and 2nd Person cannot communicate with each other!!!");
+}
+}
+}
+
+
+
+
